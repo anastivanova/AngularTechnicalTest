@@ -1,0 +1,19 @@
+<mat-card class="card">
+    <mat-card-title-group>
+        <mat-card-title>{{todoItem.label}}</mat-card-title>
+        <mat-card-subtitle>Category: {{todoItem.category}}</mat-card-subtitle>
+        <mat-checkbox [checked]="todoItem.done" (change)="onUpdate(todoItem)"></mat-checkbox>
+    </mat-card-title-group>
+
+    <mat-card-content>
+        {{todoItem.description}}
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button id="editBtn" mat-raised-button color="primary" (click)="onEdit(todoItem)">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button id="deleteBtn" mat-raised-button color="warn" (click)="onDelete(todoItem.id)">
+          <mat-icon>delete outline icon</mat-icon> Delete
+        </button>
+    </mat-card-actions>
+</mat-card>

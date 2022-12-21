@@ -1,0 +1,27 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-title>{{isEditMode ? 'Edit TODO Item' : 'Create TODO Item' }}</mat-card-title>
+
+        <mat-card-content class="card-content">
+            <mat-form-field appearance="outline">
+                <mat-label>Label:</mat-label>
+                <input required matInput placeholder="Type label for TODO item" formControlName="label">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Category:</mat-label>
+                <input required matInput placeholder="Type category for TODO item" formControlName="category">
+            </mat-form-field>
+
+            <mat-form-field [hintLabel]="'Max ' + MAX_LENGTH + ' characters:'" appearance="outline">
+                <mat-label>Description:</mat-label>
+                <textarea matInput #input [maxlength]="MAX_LENGTH" placeholder="Type description for TODO item" formControlName="description"></textarea>
+                <mat-hint align="end">{{input.value?.length || 0}}/{{MAX_LENGTH}}</mat-hint>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" [disabled]="todoForm.invalid">{{isEditMode ? 'Save' : 'Create'}}</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <mat-toolbar color="primary" class="toolbar">
+        <span>Angular Technical Test: TODO's</span>
+        <mat-slide-toggle [(ngModel)]="isSelected">
+            <span>Completed items</span>
+        </mat-slide-toggle>
+    </mat-toolbar>
+
+    <div class="container">
+        <div class="inner-container">
+            <app-modify-todo-list [todoItem]="todoItem" [isEditMode]="isEditMode" (submitted)="modifyTodoItem($event)"></app-modify-todo-list>
+        </div>
+
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <div *ngIf="todoList$ | async as todoList" class="inner-container scrollable">
+            <ng-container *ngIf="(todoList | filterDoneTodoItems: isSelected) as filterDoneTodoItems">
+                <app-todo-item *ngFor="let todoItem of filterDoneTodoItems" [todoItem]="todoItem" (delete)="onDeleteTodoItem($event)" (edit)="onEditTodoItem($event)" (update)="modifyTodoItem($event)"></app-todo-item>
+                <div *ngIf="filterDoneTodoItems.length === 0" class="empty-state">
+                    <h2>Empty TODO list</h2>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
